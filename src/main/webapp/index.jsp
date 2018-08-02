@@ -123,8 +123,7 @@
     <div class="col-sm-9">
       <h4><small>Search Result</small></h4>
       <hr>      
-      <div id="result">
-      </div>
+      <pre> Search result appears here</pre>
     </div>
   </div>
 </div>
@@ -142,9 +141,13 @@ $(document).ready(function(){
     var minamp = $("#minamp").val();
     var ps = $("#sel1").val();
     var vurl = "http://localhost:8080/health-care-provider/api/providers?max_discharges="+maxd+"&min_discharges="+mind+"&max_average_covered_charges="+maxacc+"&min_average_covered_charges="+minacc+"&max_average_medicare_payments="+maxamp+"&min_average_medicare_payments="+minamp+"&state="+ps;
-        $.ajax({url: vurl, type:'GET', dataType: 'json', success: function(data){
-        	console.log("data="+data);
-            $("#result").html(JSON.stringify(data));
+    
+        $.ajax({url: vurl, type:'GET', success: function(data){        	
+        	var jsonStr = JSON.stringify(data);
+        	var jsonObj = JSON.parse(jsonStr);
+        	var jsonPretty = JSON.stringify(jsonObj, null, '\t');
+        	$("pre").text(jsonPretty);
+        	            
         }});
         
     });
