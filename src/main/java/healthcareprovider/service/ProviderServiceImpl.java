@@ -18,12 +18,12 @@ public class ProviderServiceImpl implements ProviderService {
 	
 	@Override
 	@Transactional
-	public List<Provider> getCustomers(int max_discharges,
-			int min_discharges,
-			double max_average_covered_charges,
-			double min_average_covered_charges,
-			double max_average_medicare_payments,
-			double min_average_medicare_payments,
+	public List<Provider> getCustomers(Integer max_discharges,
+			Integer min_discharges,
+			Double max_average_covered_charges,
+			Double min_average_covered_charges,
+			Double max_average_medicare_payments,
+			Double min_average_medicare_payments,
 			String state) {
 		return customerDAO.getCustomers(max_discharges,
 				min_discharges,

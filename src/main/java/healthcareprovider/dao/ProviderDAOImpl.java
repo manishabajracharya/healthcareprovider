@@ -18,33 +18,41 @@ public class ProviderDAOImpl implements ProviderDAO {
 	private SessionFactory sessionFactory;
 			
 	@Override
-	public List<Provider> getCustomers(int max_discharges,
-			int min_discharges,
-			double max_average_covered_charges,
-			double min_average_covered_charges,
-			double max_average_medicare_payments,
-			double min_average_medicare_payments,
+	public List<Provider> getCustomers(Integer max_discharges,
+			Integer min_discharges,
+			Double max_average_covered_charges,
+			Double min_average_covered_charges,
+			Double max_average_medicare_payments,
+			Double min_average_medicare_payments,
 			String state) {
 		
 		// get the current hibernate session
 		Session currentSession = sessionFactory.getCurrentSession();
 				
 		// create a query  ... sort by last name
-		Query<Provider> theQuery = 
+		/*Query<Provider> theQuery = 
 				currentSession.createQuery("from Provider where totalDischarges<= :maxd and "
 						+ "totalDischarges>= :mind and averageCoveredCharges<= :maxacc and "
 						+ "averageCoveredCharges>= :minacc and "
 						+ "averageMedicarePayments<= :maxamp and "
 						+ "averageMedicarePayments>= :minamp and "
 						+ "providerState= :ps", Provider.class);
-		
+		*/
+		Query<Provider> theQuery = 
+				currentSession.createQuery("from Provider where (:maxd is null or totalDischarges<= :maxd) and "
+						+ "(:mind is null or totalDischarges>= :mind) and "
+						+ "(:maxacc is null or averageCoveredCharges<= :maxacc) and "
+						+ "(:minacc is null or averageCoveredCharges>= :minacc) and "
+						+ "(:maxamp is null or averageMedicarePayments<= :maxamp) and "
+						+ "(:minamp is null or averageMedicarePayments>= :minamp) and "
+						+ "(:ps is null or providerState= :ps)", Provider.class);
 		theQuery.setParameter("maxd",max_discharges );
 		theQuery.setParameter("mind",min_discharges);
 		theQuery.setParameter("maxacc",max_average_covered_charges);
 		theQuery.setParameter("minacc",min_average_covered_charges);
 		theQuery.setParameter("maxamp",max_average_medicare_payments);
 		theQuery.setParameter("minamp",min_average_medicare_payments);
-		theQuery.setParameter("ps", state);
+		theQuery.setParameter("ps",state);
 		
 		// execute query and get result list
 		List<Provider> customers = theQuery.getResultList();		

@@ -44,22 +44,21 @@
 		<br>
       <div class="input-group">
       	<label>Maximum number of Total Discharges:</label>
-        <input type="text" class="form-control" id="maxd">
+        <input type="text" class="form-control integernumber" id="maxd">
         <label>Minimum number of Total Discharges:</label>
-        <input type="text" class="form-control" id="mind">
+        <input type="text" class="form-control integernumber" id="mind">
         <label>Maximum Average Covered Charges:</label>
-        <input type="text" class="form-control" id="maxacc">
+        <input type="text" class="form-control floatnumber" id="maxacc">
         <label>Minimum Average Covered Charges:</label>
-        <input type="text" class="form-control" id="minacc">
+        <input type="text" class="form-control floatnumber" id="minacc">
         <label>Maximum Average Medicare Payment:</label>
-        <input type="text" class="form-control" id="maxamp">
+        <input type="text" class="form-control floatnumber" id="maxamp">
         <label>Minimum Average Medicare Payment:</label>
-        <input type="text" class="form-control" id="minamp">
+        <input type="text" class="form-control floatnumber" id="minamp">
              
         <div class="form-group">
           <label for="sel1">Select State:</label>
           <select class="form-control" id="sel1">
-          	<option></option>
             <option>AL</option>
             <option>AK</option>
             <option>AZ</option>
@@ -151,6 +150,20 @@ $(document).ready(function(){
         }});
         
     });
+    
+    
+    //number validation
+    $(".integernumber").on("keyup blur", function(){
+    	$(this).val($(this).val().replace(/[^0-9]/g,''));
+    });
+    
+    $(".floatnumber").on("keyup blur", function(){
+    	$(this).val($(this).val().replace(/[^0-9\.]/g,''));
+    });
+    
+    
+    
+    
 });
 </script>
 
