@@ -24,14 +24,16 @@ public class ProviderServiceImpl implements ProviderService {
 			Double min_average_covered_charges,
 			Double max_average_medicare_payments,
 			Double min_average_medicare_payments,
-			String state) {
+			String state,
+			String[] fields) {
 		return customerDAO.getCustomers(max_discharges,
 				min_discharges,
 				max_average_covered_charges,
 				min_average_covered_charges,
 				max_average_medicare_payments,
 				min_average_medicare_payments,
-				state);
+				state,
+				fields);
 	}
 
 }

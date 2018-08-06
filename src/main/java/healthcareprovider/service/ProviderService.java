@@ -12,6 +12,7 @@ public interface ProviderService {
 			Double min_average_covered_charges,
 			Double max_average_medicare_payments,
 			Double min_average_medicare_payments,
-			String state);
+			String state,
+			String[] fields);
 	
 }

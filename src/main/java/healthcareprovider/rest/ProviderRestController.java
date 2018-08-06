@@ -34,7 +34,8 @@ public class ProviderRestController {
 			@RequestParam("min_average_covered_charges") Double min_average_covered_charges,
 			@RequestParam("max_average_medicare_payments") Double max_average_medicare_payments,
 			@RequestParam("min_average_medicare_payments") Double min_average_medicare_payments,
-			@RequestParam("state") String state){
+			@RequestParam("state") String state,
+			@RequestParam("fields") String[] fields){
 
 		return customerService.getCustomers(max_discharges,
 				min_discharges,
@@ -42,7 +43,8 @@ public class ProviderRestController {
 				min_average_covered_charges,
 				max_average_medicare_payments,
 				min_average_medicare_payments,
-				state);
+				state,
+				fields);
 	}
 		
 }

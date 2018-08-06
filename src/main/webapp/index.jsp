@@ -43,9 +43,9 @@
       <h4>Search Provider</h4>
 		<br>
       <div class="input-group">
-      	<label>Maximum number of Total Discharges:</label>
+      	<label>Maximum Number Of Total Discharges:</label>
         <input type="text" class="form-control integernumber" id="maxd">
-        <label>Minimum number of Total Discharges:</label>
+        <label>Minimum Number Of Total Discharges:</label>
         <input type="text" class="form-control integernumber" id="mind">
         <label>Maximum Average Covered Charges:</label>
         <input type="text" class="form-control floatnumber" id="maxacc">
@@ -55,8 +55,7 @@
         <input type="text" class="form-control floatnumber" id="maxamp">
         <label>Minimum Average Medicare Payment:</label>
         <input type="text" class="form-control floatnumber" id="minamp">
-             
-        <div class="form-group">
+
           <label for="sel1">Select State:</label>
           <select class="form-control" id="sel1">
             <option>AL</option>
@@ -111,7 +110,23 @@
             <option>WI</option>
             <option>WY</option>
           </select>
-        </div> 		
+          <br/>
+          <label for="sel2">Select Fields For Result:</label>
+          <select class="form-control" id="sel2" required>
+          <option value="drgDefinition">DRG Definition</option>
+          <option value="providerId">Provider_Id</option>
+          <option value="providerName">Provider_Name</option>
+          <option value="providerStreetAddress">Provider_Street_Address</option>
+          <option value="providerCity">Provider_City</option>
+          <option value="providerState">Provider_State</option>
+          <option value="providerZipCode">Provider_Zip_Code</option>
+          <option value="hospitalReferralRegionDescription">Hospital_Referral_Region_Description</option>
+          <option value="totalDischarges">Total_Discharges</option>
+          <option value="averageCoveredCharges">Average_Covered_Charges</option>
+          <option value="averageTotalPayments">Average_Total_Payments</option>
+          <option value="averageMedicarePayments">Average_Medicare_Payments</option>
+          </select>
+		
       </div>
       <div>
       <br/>
@@ -130,6 +145,15 @@
 
 <script>
 $(document).ready(function(){
+	
+	//multi select for chosing columns
+	$("#sel2").attr({
+		'multiple':true,
+		'size':12
+	});
+	//by default select all from multiselect
+	$("#sel2 option").prop('selected', true);
+	
     $("button").click(function(){
     
     var maxd = $("#maxd").val();
@@ -139,11 +163,16 @@ $(document).ready(function(){
     var maxamp = $("#maxamp").val();
     var minamp = $("#minamp").val();
     var ps = $("#sel1").val();
-    var vurl = "http://localhost:8080/health-care-provider/api/providers?max_discharges="+maxd+"&min_discharges="+mind+"&max_average_covered_charges="+maxacc+"&min_average_covered_charges="+minacc+"&max_average_medicare_payments="+maxamp+"&min_average_medicare_payments="+minamp+"&state="+ps;
+    var f = $("#sel2").val();
+    var vurl = "http://localhost:8080/health-care-provider/api/providers?max_discharges="+maxd+"&min_discharges="+mind+"&max_average_covered_charges="+maxacc+"&min_average_covered_charges="+minacc+"&max_average_medicare_payments="+maxamp+"&min_average_medicare_payments="+minamp+"&state="+ps+"&fields="+f;
     
         $.ajax({url: vurl, type:'GET', success: function(data){        	
         	var jsonStr = JSON.stringify(data);
         	var jsonObj = JSON.parse(jsonStr);
+        	/*
+        	for(var i=0;i<jsonObj.length;i++){delete jsonObj[i]['providerId'];}
+        	*/
+        	
         	var jsonPretty = JSON.stringify(jsonObj, null, '\t');
         	$("pre").text(jsonPretty);
         	            
