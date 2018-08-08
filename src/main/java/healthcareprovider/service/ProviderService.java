@@ -6,7 +6,7 @@ import healthcareprovider.entity.Provider;
 
 public interface ProviderService {
 
-	public List<Provider> getCustomers(Integer max_discharges,
+	public List<Provider> getProviders(Integer max_discharges,
 			Integer min_discharges,
 			Double max_average_covered_charges,
 			Double min_average_covered_charges,

@@ -14,11 +14,11 @@ public class ProviderServiceImpl implements ProviderService {
 
 	// need to inject customer dao
 	@Autowired
-	private ProviderDAO customerDAO;
+	private ProviderDAO providerDAO;
 	
 	@Override
 	@Transactional
-	public List<Provider> getCustomers(Integer max_discharges,
+	public List<Provider> getProviders(Integer max_discharges,
 			Integer min_discharges,
 			Double max_average_covered_charges,
 			Double min_average_covered_charges,
@@ -26,7 +26,7 @@ public class ProviderServiceImpl implements ProviderService {
 			Double min_average_medicare_payments,
 			String state,
 			String[] fields) {
-		return customerDAO.getCustomers(max_discharges,
+		return providerDAO.getProviders(max_discharges,
 				min_discharges,
 				max_average_covered_charges,
 				min_average_covered_charges,

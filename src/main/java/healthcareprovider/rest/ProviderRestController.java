@@ -18,17 +18,12 @@ public class ProviderRestController {
 
 	//autowire the CustomerService
 	@Autowired
-	private ProviderService customerService;
+	private ProviderService providerService;
 	
 	//add mapping for GET / customers
-	/*@GetMapping("/customers")
-	public List<Customer> getCustomers(){
-		return customerService.getCustomers();
-	}*/
-	
 	@RequestMapping(value="/providers", method=RequestMethod.GET)
 	@ResponseBody
-	public List<Provider> getCustomers(@RequestParam("max_discharges") Integer max_discharges,
+	public List<Provider> getProviders(@RequestParam("max_discharges") Integer max_discharges,
 			@RequestParam("min_discharges") Integer min_discharges,
 			@RequestParam("max_average_covered_charges") Double max_average_covered_charges,
 			@RequestParam("min_average_covered_charges") Double min_average_covered_charges,
@@ -36,8 +31,8 @@ public class ProviderRestController {
 			@RequestParam("min_average_medicare_payments") Double min_average_medicare_payments,
 			@RequestParam("state") String state,
 			@RequestParam("fields") String[] fields){
-
-		return customerService.getCustomers(max_discharges,
+		
+		return providerService.getProviders(max_discharges,
 				min_discharges,
 				max_average_covered_charges,
 				min_average_covered_charges,

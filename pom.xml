@@ -10,7 +10,7 @@
 	<properties>
 		<springframework.version>5.0.6.RELEASE</springframework.version>
 		<hibernate.version>5.2.16.Final</hibernate.version>
-		<mysql.connector.version>5.1.45</mysql.connector.version>
+    	<mysql.connector.version>5.1.45</mysql.connector.version>
 		<c3po.version>0.9.5.2</c3po.version>
 
 		<maven.compiler.source>1.8</maven.compiler.source>
@@ -18,10 +18,7 @@
 	</properties>
 
 	<dependencies>
-
-		<!--Spring Security  -->
-		<!-- spring-security-web and spring-security-config -->
-		
+	
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -54,7 +51,8 @@
 			<artifactId>hibernate-core</artifactId>
 			<version>${hibernate.version}</version>
 		</dependency>
-
+		
+		
 		<!-- MySQL -->
 		<dependency>
 			<groupId>mysql</groupId>

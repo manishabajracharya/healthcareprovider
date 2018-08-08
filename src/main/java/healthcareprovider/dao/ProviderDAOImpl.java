@@ -10,7 +10,6 @@ import org.hibernate.criterion.LogicalExpression;
 import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.transform.AliasToBeanResultTransformer;
 import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -25,7 +24,7 @@ public class ProviderDAOImpl implements ProviderDAO {
 	private SessionFactory sessionFactory;
 			
 	@Override
-	public List<Provider> getCustomers(Integer max_discharges,
+	public List<Provider> getProviders(Integer max_discharges,
 			Integer min_discharges,
 			Double max_average_covered_charges,
 			Double min_average_covered_charges,
@@ -78,26 +77,26 @@ public class ProviderDAOImpl implements ProviderDAO {
 			cr.add(orExp);
 		}
 		if(max_average_covered_charges!=null) {
-			Criterion maxacc = Restrictions.lt("totalDischarges", max_average_covered_charges);
-			Criterion maxacce = Restrictions.eq("totalDischarges", max_average_covered_charges);
+			Criterion maxacc = Restrictions.lt("averageCoveredCharges", max_average_covered_charges);
+			Criterion maxacce = Restrictions.eq("averageCoveredCharges", max_average_covered_charges);
 			LogicalExpression orExp = Restrictions.or(maxacc,maxacce);
 			cr.add(orExp);
 		}
 		if(min_average_covered_charges!=null) {
-			Criterion minacc = Restrictions.gt("totalDischarges", min_average_covered_charges);
-			Criterion minacce = Restrictions.eq("totalDischarges", min_average_covered_charges);
+			Criterion minacc = Restrictions.gt("averageCoveredCharges", min_average_covered_charges);
+			Criterion minacce = Restrictions.eq("averageCoveredCharges", min_average_covered_charges);
 			LogicalExpression orExp = Restrictions.or(minacc,minacce);
 			cr.add(orExp);
 		}
 		if(max_average_medicare_payments!=null) {
-			Criterion maxamp = Restrictions.lt("totalDischarges", max_average_medicare_payments);
-			Criterion maxampe = Restrictions.eq("totalDischarges", max_average_medicare_payments);
+			Criterion maxamp = Restrictions.lt("averageMedicarePayments", max_average_medicare_payments);
+			Criterion maxampe = Restrictions.eq("averageMedicarePayments", max_average_medicare_payments);
 			LogicalExpression orExp = Restrictions.or(maxamp,maxampe);
 			cr.add(orExp);
 		}
 		if(min_average_medicare_payments!=null) {
-			Criterion minamp = Restrictions.gt("totalDischarges", min_average_medicare_payments);
-			Criterion minampe = Restrictions.eq("totalDischarges", min_average_medicare_payments);
+			Criterion minamp = Restrictions.gt("averageMedicarePayments", min_average_medicare_payments);
+			Criterion minampe = Restrictions.eq("averageMedicarePayments", min_average_medicare_payments);
 			LogicalExpression orExp = Restrictions.or(minamp,minampe);
 			cr.add(orExp);
 		}
@@ -119,11 +118,10 @@ public class ProviderDAOImpl implements ProviderDAO {
 		}
 		
 		// execute query and get result list
-		//List<Provider> customers = theQuery.getResultList();
-		List<Provider> customers = (List<Provider>)cr.list();
+		List<Provider> providers = (List<Provider>)cr.list();
 		
 		// return the results		
-		return customers;
+		return providers;
 	}
 
 	
