@@ -1,0 +1,4 @@
+
+
+# database setting
+src/main/resources/persistence-mysql.properties
