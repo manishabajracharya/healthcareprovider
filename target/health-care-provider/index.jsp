@@ -163,16 +163,11 @@ $(document).ready(function(){
     var maxamp = $("#maxamp").val();
     var minamp = $("#minamp").val();
     var ps = $("#sel1").val();
-    var f = $("#sel2").val();
-    //var vurl = "http://healthcareprovid420201.eastus.cloudapp.azure.com:26174/health-care-provider/api/providers?max_discharges="+maxd+"&min_discharges="+mind+"&max_average_covered_charges="+maxacc+"&min_average_covered_charges="+minacc+"&max_average_medicare_payments="+maxamp+"&min_average_medicare_payments="+minamp+"&state="+ps+"&fields="+f;
+    var f = $("#sel2").val();   
     var vurl="https://healthcareprovider.azurewebsites.net/api/providers?max_discharges="+maxd+"&min_discharges="+mind+"&max_average_covered_charges="+maxacc+"&min_average_covered_charges="+minacc+"&max_average_medicare_payments="+maxamp+"&min_average_medicare_payments="+minamp+"&state="+ps+"&fields="+f;
         $.ajax({url: vurl, type:'GET', success: function(data){        	
         	var jsonStr = JSON.stringify(data);
-        	var jsonObj = JSON.parse(jsonStr);
-        	/*
-        	for(var i=0;i<jsonObj.length;i++){delete jsonObj[i]['providerId'];}
-        	*/
-        	
+        	var jsonObj = JSON.parse(jsonStr);      	
         	var jsonPretty = JSON.stringify(jsonObj, null, '\t');
         	$("pre").text(jsonPretty);
         	            

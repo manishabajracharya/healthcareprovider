@@ -1,6 +1,7 @@
 package healthcareprovider.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import healthcareprovider.entity.Provider;
 
@@ -13,6 +14,6 @@ public interface ProviderService {
 			Double max_average_medicare_payments,
 			Double min_average_medicare_payments,
 			String state,
-			String[] fields);
+			Optional<String[]> fields);
 	
 }

@@ -1,6 +1,7 @@
 package healthcareprovider.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -31,7 +32,7 @@ public class ProviderDAOImpl implements ProviderDAO {
 			Double max_average_medicare_payments,
 			Double min_average_medicare_payments,
 			String state,
-			String[] fields) {
+			Optional<String[]> fields) {
 		
 		// get the current hibernate session
 		Session currentSession = sessionFactory.getCurrentSession();
@@ -107,9 +108,10 @@ public class ProviderDAOImpl implements ProviderDAO {
 				
 		//by default, all fields will be selected in query
 		//but if needed to add specific fields, we use Projections
-		if(fields.length!=0) {			 
+		if(fields.isPresent()) {			 
 			ProjectionList p1 = Projections.projectionList();
-			for(String s: fields) {
+			String[] fields_array= fields.get();
+			for(String s: fields_array) {
 				p1.add(Projections.property(s).as(s));
 			}
 			cr.setProjection(p1);

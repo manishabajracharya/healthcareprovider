@@ -1,6 +1,7 @@
 package healthcareprovider.rest;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +31,7 @@ public class ProviderRestController {
 			@RequestParam("max_average_medicare_payments") Double max_average_medicare_payments,
 			@RequestParam("min_average_medicare_payments") Double min_average_medicare_payments,
 			@RequestParam("state") String state,
-			@RequestParam("fields") String[] fields){
+			@RequestParam("fields") Optional<String[]> fields){
 		
 		return providerService.getProviders(max_discharges,
 				min_discharges,
