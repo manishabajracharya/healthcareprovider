@@ -25,13 +25,13 @@ public class ProviderDAOImpl implements ProviderDAO {
 	private SessionFactory sessionFactory;
 			
 	@Override
-	public List<Provider> getProviders(Integer max_discharges,
-			Integer min_discharges,
-			Double max_average_covered_charges,
-			Double min_average_covered_charges,
-			Double max_average_medicare_payments,
-			Double min_average_medicare_payments,
-			String state,
+	public List<Provider> getProviders(Optional<Integer> max_discharges,
+			Optional<Integer> min_discharges,
+			Optional<Double> max_average_covered_charges,
+			Optional<Double> min_average_covered_charges,
+			Optional<Double> max_average_medicare_payments,
+			Optional<Double> min_average_medicare_payments,
+			Optional<String> state,
 			Optional<String[]> fields) {
 		
 		// get the current hibernate session
@@ -65,44 +65,44 @@ public class ProviderDAOImpl implements ProviderDAO {
 		//add all criteria to the query
 		@SuppressWarnings("deprecation")
 		Criteria cr = currentSession.createCriteria(Provider.class);
-		if(max_discharges!=null) {
-			Criterion maxd = Restrictions.lt("totalDischarges", max_discharges);
-			Criterion maxde = Restrictions.eq("totalDischarges", max_discharges);
+		if(max_discharges.isPresent() && max_discharges.get()!=null) {
+			Criterion maxd = Restrictions.lt("totalDischarges", max_discharges.get());
+			Criterion maxde = Restrictions.eq("totalDischarges", max_discharges.get());
 			LogicalExpression orExp = Restrictions.or(maxd,maxde);
 			cr.add(orExp);
 		}
-		if(min_discharges!=null) {
-			Criterion mind = Restrictions.gt("totalDischarges", min_discharges);
-			Criterion minde = Restrictions.eq("totalDischarges", min_discharges);
+		if(min_discharges.isPresent() && min_discharges.get()!=null) {
+			Criterion mind = Restrictions.gt("totalDischarges", min_discharges.get());
+			Criterion minde = Restrictions.eq("totalDischarges", min_discharges.get());
 			LogicalExpression orExp = Restrictions.or(mind,minde);
 			cr.add(orExp);
 		}
-		if(max_average_covered_charges!=null) {
-			Criterion maxacc = Restrictions.lt("averageCoveredCharges", max_average_covered_charges);
-			Criterion maxacce = Restrictions.eq("averageCoveredCharges", max_average_covered_charges);
+		if(max_average_covered_charges.isPresent() && max_average_covered_charges.get()!=null) {
+			Criterion maxacc = Restrictions.lt("averageCoveredCharges", max_average_covered_charges.get());
+			Criterion maxacce = Restrictions.eq("averageCoveredCharges", max_average_covered_charges.get());
 			LogicalExpression orExp = Restrictions.or(maxacc,maxacce);
 			cr.add(orExp);
 		}
-		if(min_average_covered_charges!=null) {
-			Criterion minacc = Restrictions.gt("averageCoveredCharges", min_average_covered_charges);
-			Criterion minacce = Restrictions.eq("averageCoveredCharges", min_average_covered_charges);
+		if(min_average_covered_charges.isPresent() && min_average_covered_charges.get()!=null) {
+			Criterion minacc = Restrictions.gt("averageCoveredCharges", min_average_covered_charges.get());
+			Criterion minacce = Restrictions.eq("averageCoveredCharges", min_average_covered_charges.get());
 			LogicalExpression orExp = Restrictions.or(minacc,minacce);
 			cr.add(orExp);
 		}
-		if(max_average_medicare_payments!=null) {
-			Criterion maxamp = Restrictions.lt("averageMedicarePayments", max_average_medicare_payments);
-			Criterion maxampe = Restrictions.eq("averageMedicarePayments", max_average_medicare_payments);
+		if(max_average_medicare_payments.isPresent() && max_average_medicare_payments.get()!=null) {
+			Criterion maxamp = Restrictions.lt("averageMedicarePayments", max_average_medicare_payments.get());
+			Criterion maxampe = Restrictions.eq("averageMedicarePayments", max_average_medicare_payments.get());
 			LogicalExpression orExp = Restrictions.or(maxamp,maxampe);
 			cr.add(orExp);
 		}
-		if(min_average_medicare_payments!=null) {
-			Criterion minamp = Restrictions.gt("averageMedicarePayments", min_average_medicare_payments);
-			Criterion minampe = Restrictions.eq("averageMedicarePayments", min_average_medicare_payments);
+		if(min_average_medicare_payments.isPresent() && min_average_medicare_payments.get()!=null) {
+			Criterion minamp = Restrictions.gt("averageMedicarePayments", min_average_medicare_payments.get());
+			Criterion minampe = Restrictions.eq("averageMedicarePayments", min_average_medicare_payments.get());
 			LogicalExpression orExp = Restrictions.or(minamp,minampe);
 			cr.add(orExp);
 		}
-		if(state!=null) {
-			Criterion ps = Restrictions.eq("providerState", state);
+		if(state.isPresent() && state.get()!=null) {
+			Criterion ps = Restrictions.eq("providerState", state.get());
 			cr.add(ps);
 		}
 				

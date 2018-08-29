@@ -7,13 +7,13 @@ import healthcareprovider.entity.Provider;
 
 public interface ProviderDAO {
 
-	public List<Provider> getProviders(Integer max_discharges,
-			Integer min_discharges,
-			Double max_average_covered_charges,
-			Double min_average_covered_charges,
-			Double max_average_medicare_payments,
-			Double min_average_medicare_payments,
-			String state,
+	public List<Provider> getProviders(Optional<Integer> max_discharges,
+			Optional<Integer> min_discharges,
+			Optional<Double> max_average_covered_charges,
+			Optional<Double> min_average_covered_charges,
+			Optional<Double> max_average_medicare_payments,
+			Optional<Double> min_average_medicare_payments,
+			Optional<String> state,
 			Optional<String[]> fields);
 	
 }

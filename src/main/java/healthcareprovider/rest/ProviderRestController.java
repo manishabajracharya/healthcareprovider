@@ -24,13 +24,13 @@ public class ProviderRestController {
 	//add mapping for GET / customers
 	@RequestMapping(value="/providers", method=RequestMethod.GET)
 	@ResponseBody
-	public List<Provider> getProviders(@RequestParam("max_discharges") Integer max_discharges,
-			@RequestParam("min_discharges") Integer min_discharges,
-			@RequestParam("max_average_covered_charges") Double max_average_covered_charges,
-			@RequestParam("min_average_covered_charges") Double min_average_covered_charges,
-			@RequestParam("max_average_medicare_payments") Double max_average_medicare_payments,
-			@RequestParam("min_average_medicare_payments") Double min_average_medicare_payments,
-			@RequestParam("state") String state,
+	public List<Provider> getProviders(@RequestParam("max_discharges") Optional<Integer> max_discharges,
+			@RequestParam("min_discharges") Optional<Integer> min_discharges,
+			@RequestParam("max_average_covered_charges") Optional<Double> max_average_covered_charges,
+			@RequestParam("min_average_covered_charges") Optional<Double> min_average_covered_charges,
+			@RequestParam("max_average_medicare_payments") Optional<Double> max_average_medicare_payments,
+			@RequestParam("min_average_medicare_payments") Optional<Double> min_average_medicare_payments,
+			@RequestParam("state") Optional<String> state,
 			@RequestParam("fields") Optional<String[]> fields){
 		
 		return providerService.getProviders(max_discharges,
